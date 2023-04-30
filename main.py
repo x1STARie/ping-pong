@@ -125,21 +125,13 @@ class Ball(GameSprite):
             self.rect.y -= self.speed
 
         if self.rect.x < 0:
-            score2 += 1
-            self.rect.x = 315
-            self.rect.y = 225
-            down = False
-            right = False
-            top = False
-            left = True
+            finish = True
+            win1 = font2.render("Правый игрок выиграл!", 1, (255, 255, 255))
+            window.blit(win1, (225, 225))
         if self.rect.x > 700:
-            score1 += 1
-            self.rect.x = 315
-            self.rect.y = 225
-            down = False
-            right = True
-            top = False
-            left = False
+            finish = True
+            win2 = font2.render("Левый игрок выиграл!", 1, (255, 255, 255))
+            window.blit(win2, (225, 225))
 
 win_width = 700
 win_height = 500
@@ -161,9 +153,6 @@ while run:
     if not finish:
         window.fill(bg_color)
 
-        text = font2.render(str(score1) + " - " + str(score2), 1, (255, 255, 255))
-        window.blit(text, (325, 20))
-
         ten_ball.update()
         Player1.update_l()
         Player2.update_r()
@@ -172,17 +161,6 @@ while run:
         Player2.reset()
 
         ten_ball.reset()
-
-        if score1 >= 15:
-            score1 = 15
-            finish = True
-            win1 = font2.render("Игрок 1 выиграл!", 1, (255, 255, 255))
-            window.blit(win1, (250, 225))
-        if score2 >= 15:
-            score2 = 15
-            finish = True
-            win2 = font2.render("Игрок 2 выиграл!", 1, (255, 255, 255))
-            window.blit(win2, (250, 225))
         
         display.update()
     #цикл срабатывает каждую 0.05 секунд
